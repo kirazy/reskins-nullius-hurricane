@@ -15,7 +15,7 @@ local recipe_tint = {}
 local _sprite_utils = { colors = require("__reskins-sprite-utils__.colors") }
 
 local function note(msg)
-	log("[nullius-hurricane-reskins] " .. msg)
+	log("[reskins-nullius-hurricane] " .. msg)
 end
 
 -- Normalize a Color (named or array form) to {r,g,b,a} floats in 0..1.

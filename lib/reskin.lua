@@ -32,11 +32,7 @@ local STUBS_OFF = not _framework.settings.get_value("reskins-nullius-hurricane-s
 local SEARCH_TYPES = require("lib.search_types")
 
 local function note(msg)
-	log("[nullius-hurricane-reskins] " .. msg)
-end
-
-local function fail_or_note(msg)
-	note(msg)
+	log("[reskins-nullius-hurricane] " .. msg)
 end
 
 -- Resolve the tint colour for a tier: the building's per-tier override if it
@@ -263,7 +259,7 @@ local function apply_to_proto(entry, cfg)
 	local scale_mult = scale_for(cfg, entry)
 	local layers = build_layers(cfg, entry.tier, scale_mult)
 	if not layers then
-		fail_or_note(cfg.source .. ": base sprite definition missing; skipped " .. entry.name)
+		note(cfg.source .. ": base sprite definition missing; skipped " .. entry.name)
 		return false
 	end
 	local anim = { layers = layers }
@@ -373,7 +369,7 @@ local function apply_to_proto(entry, cfg)
 		proto.horizontal_animation = anim
 		proto.vertical_animation = anim
 	else
-		fail_or_note(entry.name .. " has unhandled type " .. ptype .. "; skipped")
+		note(entry.name .. " has unhandled type " .. ptype .. "; skipped")
 		return false
 	end
 
@@ -446,7 +442,7 @@ end
 function reskin.run(cfg)
 	local targets = reskin.find_targets(cfg.pattern)
 	if #targets == 0 then
-		fail_or_note("no Nullius prototypes matched pattern '" .. cfg.pattern .. "'")
+		note("no Nullius prototypes matched pattern '" .. cfg.pattern .. "'")
 		return
 	end
 	local non_stub = {}
