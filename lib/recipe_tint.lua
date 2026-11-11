@@ -12,6 +12,8 @@
 
 local recipe_tint = {}
 
+local _sprite_utils = { colors = require("__reskins-sprite-utils__.colors") }
+
 local function note(msg)
 	log("[nullius-hurricane-reskins] " .. msg)
 end
@@ -21,15 +23,7 @@ local function as_rgba(c)
 	if not c then
 		return nil
 	end
-	local r = c.r or c[1] or 0
-	local g = c.g or c[2] or 0
-	local b = c.b or c[3] or 0
-	local a = c.a or c[4] or 1
-	-- Factorio accepts 0..255 colours; treat >1 on any channel as 8-bit.
-	if r > 1 or g > 1 or b > 1 then
-		r, g, b = r / 255, g / 255, b / 255
-	end
-	return { r = r, g = g, b = b, a = a }
+	return _sprite_utils.colors.normalize(c)
 end
 
 -- Scale a colour so its brightest channel is 1, preserving hue. Fluid
