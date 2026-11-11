@@ -5,13 +5,6 @@ if not data.raw["assembling-machine"] then
 	return
 end
 
--- Bail cleanly if Nullius isn't actually loaded (belt-and-braces; the
--- dependency in info.json should guarantee it).
-if not mods["nullius"] then
-	log("[nullius-hurricane-reskins] Nullius not present; nothing to do")
-	return
-end
-
 if settings.startup["nvo-debug-dump"] and settings.startup["nvo-debug-dump"].value then
 	require("lib.debug")()
 end
