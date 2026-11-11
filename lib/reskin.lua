@@ -8,7 +8,10 @@
 -- art -- the engine then draws/orients/caps it per connection (see the pipe art
 -- block in apply_to_proto and lib/pipe_sprites.lua); there is no runtime script.
 
-local _sprite_utils = { icons = require("__reskins-sprite-utils__.icons") }
+local _sprite_utils = {
+	icons = require("__reskins-sprite-utils__.icons"),
+	colors = require("__reskins-sprite-utils__.colors"),
+}
 local _framework = {
 	tiers = require("__reskins-framework__.api.tiers"),
 	settings = require("__reskins-framework__.api.settings"),
@@ -40,7 +43,10 @@ end
 -- has one, else the shared tier palette (clamped to the last defined colour for
 -- tiers beyond the palette). Used by the mask, split-emission, and icon layers.
 local function tier_color(cfg, tier)
-	return (cfg.tint_override and cfg.tint_override[tier]) or _framework.tiers.get_tint(tier)
+	-- Artisanal Reskins tints tend to run bright with the Hurricane masks, so perceptually darken
+	-- the tints to better integrate with other entities.
+	local tint = (cfg.tint_override and cfg.tint_override[tier]) or _framework.tiers.get_tint(tier)
+	return _sprite_utils.colors.blend(tint, { 0, 0, 0 }, 0.10)
 end
 
 -- Infer tier from prototype name: trailing "-N". Defaults to 1.
