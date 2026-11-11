@@ -18,29 +18,31 @@ local PTG = "__base__/graphics/entity/pipe-to-ground/"
 -- shifted one tile INWARD (opposite the mouth direction) so the stub sits a tile
 -- further into the body, with the mouth meeting the building edge.
 function M.stub_picture()
-  local function spr(file, shift)
-    return {
-      filename = PTG .. file,
-      priority = "extra-high",
-      width = 128,
-      height = 128,
-      scale = 0.5,
-      shift = shift,
-    }
-  end
-  return {
-    north = spr("pipe-to-ground-up.png",    { 0,  1 }),
-    east  = spr("pipe-to-ground-right.png", { -1, 0 }),
-    south = spr("pipe-to-ground-down.png",  { 0, -1 }),
-    west  = spr("pipe-to-ground-left.png",  { 1,  0 }),
-  }
+	local function spr(file, shift)
+		return {
+			filename = PTG .. file,
+			priority = "extra-high",
+			width = 128,
+			height = 128,
+			scale = 0.5,
+			shift = shift,
+		}
+	end
+	return {
+		north = spr("pipe-to-ground-up.png", { 0, 1 }),
+		east = spr("pipe-to-ground-right.png", { -1, 0 }),
+		south = spr("pipe-to-ground-down.png", { 0, -1 }),
+		west = spr("pipe-to-ground-left.png", { 1, 0 }),
+	}
 end
 
 -- Base-game pipe end-caps (Sprite4Way), via the global base defines. nil if the
 -- base helper is somehow unavailable (then ports simply show no cap).
 function M.covers()
-  if type(pipecoverspictures) == "function" then return pipecoverspictures() end
-  return nil
+	if type(pipecoverspictures) == "function" then
+		return pipecoverspictures()
+	end
+	return nil
 end
 
 return M
