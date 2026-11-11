@@ -2,7 +2,7 @@
 Version: 0.2.0
 Date: ????
   Features:
-    - Updated to Factorio 2.1.
+    - Forked Nullius: Hurricane Reskins and updated to Factorio 2.1.
     - Integrated with Artisanal Reskins: Framework.
   Changes:
     - Removed debug settings.
