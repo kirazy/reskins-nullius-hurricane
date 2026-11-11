@@ -7,11 +7,10 @@ data:extend({
 		--   off - strip the connection art; ports render bare.
 		-- (Legacy "dynamic"/"baked" values are treated as "on"; there is no longer a
 		-- runtime script.)
-		type = "string-setting",
-		name = "nvo-pipe-stub-mode",
+		type = "bool-setting",
+		name = "reskins-nullius-hurricane-show-pipe-pictures",
 		setting_type = "startup",
-		default_value = "on",
-		allowed_values = { "on", "off" },
+		default_value = true,
 		order = "c",
 	},
 })

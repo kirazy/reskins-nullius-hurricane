@@ -9,7 +9,10 @@
 -- block in apply_to_proto and lib/pipe_sprites.lua); there is no runtime script.
 
 local _sprite_utils = { icons = require("__reskins-sprite-utils__.icons") }
-local _framework = { tiers = require("__reskins-framework__.api.tiers") }
+local _framework = {
+	tiers = require("__reskins-framework__.api.tiers"),
+	settings = require("__reskins-framework__.api.settings"),
+}
 
 local sprite = require("lib.sprite")
 local pipe_art = require("lib.pipe_sprites")
@@ -20,7 +23,7 @@ local reskin = {}
 -- end-cap) on each reskinned building. "off" leaves the building's connection
 -- art stripped (bare). Any other value installs the engine-native art (the old
 -- "dynamic"/"baked" distinction is gone -- there is no runtime script anymore).
-local STUBS_OFF = (settings.startup["nvo-pipe-stub-mode"] and settings.startup["nvo-pipe-stub-mode"].value) == "off"
+local STUBS_OFF = not _framework.settings.get_value("reskins-nullius-hurricane-show-pipe-pictures")
 
 -- Prototype types Nullius uses for the buildings in scope (shared with lib/debug).
 local SEARCH_TYPES = require("lib.search_types")
