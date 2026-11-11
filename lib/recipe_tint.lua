@@ -76,6 +76,17 @@ local function categories_of(targets)
 	return set
 end
 
+-- Checks if any category of the given recipe is in `cats`. A recipe without
+-- `categories` has the category "crafting".
+local function in_categories(recipe, cats)
+	for _, cat in pairs(recipe.categories or { "crafting" }) do
+		if cats[cat] then
+			return true
+		end
+	end
+	return false
+end
+
 -- Populate crafting_machine_tint.primary on every recipe in `targets`' crafting
 -- categories that lacks a tint, derived from the recipe's fluid colour.
 function recipe_tint.populate(targets)
@@ -92,8 +103,7 @@ function recipe_tint.populate(targets)
 
 	local applied, skipped = 0, 0
 	for name, r in pairs(data.raw.recipe or {}) do
-		local cat = r.category or "crafting"
-		if cats[cat] and not r.crafting_machine_tint then
+		if in_categories(r, cats) and not r.crafting_machine_tint then
 			local color = recipe_fluid_color(r)
 			if color then
 				r.crafting_machine_tint = { primary = color }
