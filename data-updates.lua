@@ -1,6 +1,3 @@
--- data-final-fixes.lua
--- Runs after Nullius (and reskins-nullius, if present) so our overrides win.
-
 if not data.raw["assembling-machine"] then
 	return
 end
