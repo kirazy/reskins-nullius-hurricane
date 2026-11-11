@@ -1,20 +1,22 @@
 {
-  "name": "reskins-nullius-hurricane",
-  "version": "0.2.1",
-  "title": "Artisanal Reskins: Nullius Hurricane",
-  "author": "Kirazy",
-  "factorio_version": "2.1",
-  "dependencies": [
-    "base >= 2.1",
-    "nullius",
-    "reskins-framework >= 0.2.1",
-    "? reskins-nullius",
-    "? tricky-old-nick",
-    "? lambent-nil",
-    "? configurable-valves",
-    "? nullius-visual-tweaks"
-  ],
-  "package": {
-    "git_publish_branch": "main"
-  }
+	"name": "reskins-nullius-hurricane",
+	"version": "0.2.1",
+	"factorio_version": "2.1",
+	"title": "Artisanal Reskins: Nullius Hurricane",
+	"author": "Kirazy",
+	"contact": "https://discord.gg/qAvSyzZFPr",
+	"homepage": "https://github.com/kirazy/reskins-nullius-hurricane",
+	"dependencies": [
+		"base >= 2.1",
+		"nullius",
+		"reskins-framework >= 0.2.1",
+		"? reskins-nullius",
+		"? tricky-old-nick",
+		"? lambent-nil",
+		"? configurable-valves",
+		"? nullius-visual-tweaks"
+	],
+	"package": {
+		"git_publish_branch": "main"
+	}
 }
