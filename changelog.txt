@@ -3,8 +3,10 @@ Version: 0.2.0
 Date: ????
   Features:
     - Updated to Factorio 2.1.
+    - Integrated with Artisanal Reskins: Framework.
   Changes:
     - Removed debug settings.
+    - Removed tier label settings; configure using settings under Artisanal Reskins: Framework.
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.4
 Date: 2026-06-18

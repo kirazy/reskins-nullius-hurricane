@@ -8,8 +8,10 @@
 -- art -- the engine then draws/orients/caps it per connection (see the pipe art
 -- block in apply_to_proto and lib/pipe_sprites.lua); there is no runtime script.
 
+local _sprite_utils = { icons = require("__reskins-sprite-utils__.icons") }
+local _framework = { tiers = require("__reskins-framework__.api.tiers") }
+
 local sprite = require("lib.sprite")
-local tiers = require("lib.tiers")
 local pipe_art = require("lib.pipe_sprites")
 
 local reskin = {}
@@ -35,7 +37,7 @@ end
 -- has one, else the shared tier palette (clamped to the last defined colour for
 -- tiers beyond the palette). Used by the mask, split-emission, and icon layers.
 local function tier_color(cfg, tier)
-	return (cfg.tint_override and cfg.tint_override[tier]) or tiers.colors[tier] or tiers.colors[#tiers.colors]
+	return (cfg.tint_override and cfg.tint_override[tier]) or _framework.tiers.get_tint(tier)
 end
 
 -- Infer tier from prototype name: trailing "-N". Defaults to 1.
@@ -371,28 +373,7 @@ local function apply_to_proto(entry, cfg)
 	return true
 end
 
-local PIPS = settings.startup["nvo-tier-pips"] and settings.startup["nvo-tier-pips"].value
-local MOD = "__nullius-hurricane-reskins__"
-
--- Tier pips: a stack of tier-coloured dots (one per tier) in the icon's
--- top-left corner -- the reskins-framework "dots" tier labels, reproduced
--- exactly. The art (graphics/icon/tiers/dots/, reused from reskins-framework
--- under MIT) is a colour-agnostic white dot + dark outline, mipmapped. Like the
--- framework, it is drawn as two layers: untinted for the outline, then the same
--- art tinted with the tier colour at 0.75 alpha for the fill. icon_size/scale
--- are left to match the building icon layers so the pips register identically.
--- There is no pip art beyond tier 4, so higher tiers simply get none.
-local function append_pips(icons, tier)
-	if not PIPS or not tier or tier < 1 or tier > 4 then
-		return icons
-	end
-	local pc = tiers.pip_colors or tiers.colors
-	local color = pc[tier] or pc[#pc]
-	local pip = MOD .. "/graphics/icon/tiers/dots/" .. tier .. ".png"
-	icons[#icons + 1] = { icon = pip, icon_size = 64 }
-	icons[#icons + 1] = { icon = pip, icon_size = 64, tint = { r = color.r, g = color.g, b = color.b, a = 0.75 } }
-	return icons
-end
+local MOD = "__reskins-nullius-hurricane__"
 
 -- Build the icons table for a building. With a mask (cfg.icon_mask) the icon is
 -- tinted per tier like the sprites; otherwise it is a single flat icon
@@ -411,13 +392,18 @@ local function build_icons(cfg, tier)
 	else
 		icons = { { icon = dir .. cfg.source .. "-icon.png", icon_size = size } }
 	end
-	return append_pips(icons, tier)
+	return icons
 end
 
-local function set_icons(proto, icons)
-	proto.icons = util.table.deepcopy(icons)
-	proto.icon = nil
-	proto.icon_size = nil
+local function set_icons(tier, proto, icons)
+	local icon_assignment = _framework.tiers.icon_assignment_with_tier_labels({
+		tier = tier,
+		name = proto.name,
+		type_name = proto.type,
+		icon_data = icons,
+	})
+
+	_sprite_utils.icons.apply_icon_assignment(icon_assignment)
 end
 
 -- Replace icons on the entity AND on the item/recipe that build it. Nullius
@@ -431,7 +417,7 @@ local function apply_icons(entry, cfg)
 		return
 	end
 	local icons = build_icons(cfg, entry.tier)
-	set_icons(entry.proto, icons)
+	set_icons(entry.tier, entry.proto, icons)
 
 	local pb = entry.proto.placeable_by
 	local item_name = (pb and pb.item) or (entry.proto.minable and entry.proto.minable.result)
@@ -442,7 +428,7 @@ local function apply_icons(entry, cfg)
 	for _, group in ipairs({ "item", "recipe" }) do
 		local p = data.raw[group] and data.raw[group][item_name]
 		if p then
-			set_icons(p, icons)
+			set_icons(entry.tier, p, icons)
 		end
 	end
 end

@@ -14,14 +14,4 @@ data:extend({
 		allowed_values = { "on", "off" },
 		order = "c",
 	},
-	{
-		-- Tier pips on item/recipe/entity icons: a small stack of tier-coloured dots
-		-- (1 dot = tier 1, 2 = tier 2, ...) in the icon's bottom-left corner, like
-		-- the reskins-nullius mod. Only added to buildings the mod already reskins.
-		type = "bool-setting",
-		name = "nvo-tier-pips",
-		setting_type = "startup",
-		default_value = true,
-		order = "d",
-	},
 })
