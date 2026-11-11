@@ -17,7 +17,7 @@
 --                  default installs the engine-native stub + cap. The global
 --                  on/off switch is the nvo-pipe-stub-mode startup setting.
 --   icon           true to also replace entity/item/recipe icons. Uses a
---                  single flat icon graphics/icon/<source>/<source>-icon.png.
+--                  single flat icon graphics/icons/<source>/<source>-icon.png.
 --   icon_mask      true if a tinted base+mask icon pair is supplied instead
 --                  (<source>-icon-base.png + <source>-icon-mask.png).
 --   icon_size      icon pixel size (default 64).

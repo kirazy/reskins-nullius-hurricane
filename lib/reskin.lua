@@ -380,7 +380,7 @@ local MOD = "__reskins-nullius-hurricane__"
 -- (matching the current maskless asset set). Tier pips are appended last so
 -- they sit on top.
 local function build_icons(cfg, tier)
-	local dir = MOD .. "/graphics/icon/" .. cfg.source .. "/"
+	local dir = MOD .. "/graphics/icons/" .. cfg.source .. "/"
 	local size = cfg.icon_size or 64
 	local icons
 	if cfg.icon_mask then
