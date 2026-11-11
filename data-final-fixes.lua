@@ -5,10 +5,6 @@ if not data.raw["assembling-machine"] then
 	return
 end
 
-if settings.startup["nvo-debug-dump"] and settings.startup["nvo-debug-dump"].value then
-	require("lib.debug")()
-end
-
 local reskin = require("lib.reskin")
 local buildings = require("config.buildings")
 

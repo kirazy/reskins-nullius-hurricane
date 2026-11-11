@@ -1,21 +1,5 @@
 data:extend({
 	{
-		type = "bool-setting",
-		name = "nvo-debug-dump",
-		setting_type = "startup",
-		default_value = false, -- diagnostic prototype dump; off for release, flip on to debug
-		order = "a",
-	},
-	{
-		type = "bool-setting",
-		name = "nvo-strict",
-		setting_type = "startup",
-		default_value = false,
-		order = "b",
-		-- when true, a missing sprite definition raises an error instead of
-		-- logging and skipping. Useful once the asset set is complete.
-	},
-	{
 		-- Fluid-connection art on reskinned buildings:
 		--   on  - install the mod's engine-native underground stub + end-cap on each
 		--         fluid box (pipe_picture + pipe_covers, drawn/oriented/capped by the

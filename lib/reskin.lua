@@ -14,8 +14,6 @@ local pipe_art = require("lib.pipe_sprites")
 
 local reskin = {}
 
-local STRICT = settings.startup["nvo-strict"] and settings.startup["nvo-strict"].value or false
-
 -- Whether to install the mod's own fluid-connection art (underground stub +
 -- end-cap) on each reskinned building. "off" leaves the building's connection
 -- art stripped (bare). Any other value installs the engine-native art (the old
@@ -30,9 +28,6 @@ local function note(msg)
 end
 
 local function fail_or_note(msg)
-	if STRICT then
-		error("[nullius-hurricane-reskins] " .. msg)
-	end
 	note(msg)
 end
 
