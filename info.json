@@ -1,12 +1,11 @@
 {
-  "name": "nullius-hurricane-reskins",
-  "version": "0.1.4",
-  "title": "Nullius: Hurricane Reskins",
+  "name": "reskins-nullius-hurricane",
+  "version": "0.2.0",
+  "title": "Artisanal Reskins: Nullius Hurricane",
   "author": "brickbrycebrick",
-  "description": "Reskins Nullius buildings with Hurricane046's high-resolution animated sprites, with tier coloring (yellow/red/blue) applied at load via tint masks. Building art by Hurricane046 (https://www.figma.com/proto/y1IQG08ZG2jIeJ5sTyF4MP/Factorio-Buildings), used under CC BY 4.0.",
-  "factorio_version": "2.0",
+  "factorio_version": "2.1",
   "dependencies": [
-    "base >= 2.0",
+    "base >= 2.1",
     "nullius",
     "? reskins-nullius",
     "? tricky-old-nick",
